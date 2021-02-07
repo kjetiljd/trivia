@@ -1,13 +1,13 @@
 package com.adaptionsoft.games.trivia
 
-import org.junit.jupiter.api.Assertions.assertTrue
+import com.adaptionsoft.games.trivia.runner.main
 import org.junit.jupiter.api.Test
 
 
 class SomeTest {
 
     @Test
-    fun true_is_true() {
-        assertTrue(false)
+    fun `Can call game runner`() {
+        main(arrayOf())
     }
 }
