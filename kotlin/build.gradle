@@ -8,6 +8,7 @@ repositories {
 
 dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter:5.7.0"
+    testImplementation 'com.github.stefanbirkner:system-lambda:1.0.0'
 }
 
 tasks.test {
