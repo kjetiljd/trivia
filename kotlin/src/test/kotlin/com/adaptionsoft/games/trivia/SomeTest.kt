@@ -23,8 +23,6 @@ class SomeTest {
             val seed = "0"
             main(arrayOf(seed))
         }
-        assertTrue(actual.isNotBlank())
-        println(actual)
         assertEquals(expected, actual)
     }
 }
