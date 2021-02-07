@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
     aGame.add("Pat")
     aGame.add("Sue")
 
-    val rand = Random()
+    val rand = if (args.isEmpty()) Random() else Random(args[0].toLong())
 
     do {
 
