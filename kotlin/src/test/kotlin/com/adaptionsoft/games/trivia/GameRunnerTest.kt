@@ -21,7 +21,7 @@ class GameRunnerTest {
     @Test
     fun `Game runner output is as approved`() {
         val actual = tapSystemOut {
-            val seed = "0"
+            val seed = 0L.toString()
             main(arrayOf(seed))
         }
         Approvals.verify(actual)
