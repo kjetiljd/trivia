@@ -6,6 +6,7 @@ import org.approvaltests.Approvals
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import java.util.stream.LongStream.range
 
 
 class GameRunnerTest {
@@ -37,5 +38,18 @@ class GameRunnerTest {
             main(arrayOf(seed))
         }
         assertEquals(uglyTrivia, trivia)
+    }
+
+    @Test
+    fun `Ugly and new implementation report same result for many different seeds`() {
+        for (seed in 1L..1000L) {
+            val uglyTrivia = tapSystemOut {
+                com.adaptionsoft.games.uglytrivia.runner.main(arrayOf(seed.toString()))
+            }
+            val trivia = tapSystemOut {
+                main(arrayOf(seed.toString()))
+            }
+            assertEquals(uglyTrivia, trivia, "Results differ when seed is $seed")
+        }
     }
 }
