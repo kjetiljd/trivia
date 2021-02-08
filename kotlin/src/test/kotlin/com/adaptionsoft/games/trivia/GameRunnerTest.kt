@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 
-class SomeTest {
+class GameRunnerTest {
 
     @Test
     fun `Game runner output is captured`() {
