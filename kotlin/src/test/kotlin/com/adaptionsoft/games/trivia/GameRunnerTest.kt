@@ -26,4 +26,16 @@ class GameRunnerTest {
         }
         Approvals.verify(actual)
     }
+
+    @Test
+    fun `Ugly and new implementation report same result`() {
+        val seed = 0L.toString()
+        val uglyTrivia = tapSystemOut {
+            com.adaptionsoft.games.uglytrivia.runner.main(arrayOf(seed))
+        }
+        val trivia = tapSystemOut {
+            main(arrayOf(seed))
+        }
+        assertEquals(uglyTrivia, trivia)
+    }
 }

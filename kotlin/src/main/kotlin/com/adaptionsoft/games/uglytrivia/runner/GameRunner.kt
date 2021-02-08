@@ -1,6 +1,6 @@
-package com.adaptionsoft.games.trivia.runner
+package com.adaptionsoft.games.uglytrivia.runner
 
-import com.adaptionsoft.games.trivia.Game
+import com.adaptionsoft.games.uglytrivia.Game
 import java.util.*
 
 object GameRunner {
