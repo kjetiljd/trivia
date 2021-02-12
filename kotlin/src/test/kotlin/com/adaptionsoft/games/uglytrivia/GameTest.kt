@@ -167,12 +167,18 @@ internal class GameTest {
         val game = Game()
         game.add("Anita")
 
-        val output = tapSystemOut {
-            game.roll(1)
-        }
-        val actual = categoryFrom(output)
-        
-        assertEquals("Science", actual)
+        assertEquals("Science", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Sports", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Rock", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Pop", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Science", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Sports", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Rock", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Pop", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Science", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Sports", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Rock", categoryFrom(tapSystemOut { game.roll(1) }))
+        assertEquals("Pop", categoryFrom(tapSystemOut { game.roll(1) }))
     }
 
     private fun categoryFrom(output: String) = output
