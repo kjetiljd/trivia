@@ -146,3 +146,7 @@ class Game {
 
     private fun didPlayerWin() = purses[currentPlayer] != 6
 }
+
+private class Player {
+
+}
