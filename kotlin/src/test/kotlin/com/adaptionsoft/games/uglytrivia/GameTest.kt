@@ -40,7 +40,6 @@ internal class GameTest {
     fun `roll announces player, roll and question`() {
         val game = Game()
         game.add("Anita")
-        game.add("Ben")
 
         val actual = tapSystemOut {
             game.roll(1)
