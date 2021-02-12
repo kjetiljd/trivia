@@ -92,10 +92,10 @@ class Game {
                 println("Answer was correct!!!!")
                 players[currentPlayer].addCoin()
 
-                val winner = !players[currentPlayer].playerWon()
+                val noWinnerYet = !players[currentPlayer].playerWon()
                 currentPlayer++
                 if (currentPlayer == players.size) currentPlayer = 0
-                return winner
+                return noWinnerYet
             } else {
                 currentPlayer++
                 if (currentPlayer == players.size) currentPlayer = 0
@@ -105,10 +105,10 @@ class Game {
             println("Answer was corrent!!!!")
             players[currentPlayer].addCoin()
 
-            val winner = !players[currentPlayer].playerWon()
+            val noWinnerYet = !players[currentPlayer].playerWon()
             currentPlayer++
             if (currentPlayer == players.size) currentPlayer = 0
-            return winner
+            return noWinnerYet
         }
     }
 
