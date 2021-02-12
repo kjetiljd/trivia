@@ -49,7 +49,7 @@ class Game {
                         + "'s new location is "
                         + players[currentPlayer].place)
                 println("The category is " + currentCategory(players[currentPlayer].place))
-                askQuestion()
+                askQuestion(currentCategory(players[currentPlayer].place))
             } else {
                 println(players[currentPlayer].name + " is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
@@ -61,19 +61,19 @@ class Game {
                     + "'s new location is "
                     + players[currentPlayer].place)
             println("The category is " + currentCategory(players[currentPlayer].place))
-            askQuestion()
+            askQuestion(currentCategory(players[currentPlayer].place))
         }
 
     }
 
-    private fun askQuestion() {
-        if (currentCategory(players[currentPlayer].place) === "Pop")
+    private fun askQuestion(category: String) {
+        if (category === "Pop")
             println(popQuestions.removeFirst())
-        if (currentCategory(players[currentPlayer].place) === "Science")
+        if (category === "Science")
             println(scienceQuestions.removeFirst())
-        if (currentCategory(players[currentPlayer].place) === "Sports")
+        if (category === "Sports")
             println(sportsQuestions.removeFirst())
-        if (currentCategory(players[currentPlayer].place) === "Rock")
+        if (category === "Rock")
             println(rockQuestions.removeFirst())
     }
 
