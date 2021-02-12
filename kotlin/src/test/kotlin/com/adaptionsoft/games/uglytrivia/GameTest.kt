@@ -22,7 +22,6 @@ internal class GameTest {
 
         game.add("Kenny")
         assertTrue(game.isPlayable())
-
     }
 
     @Test
