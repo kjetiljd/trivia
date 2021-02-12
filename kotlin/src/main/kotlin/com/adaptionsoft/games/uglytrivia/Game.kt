@@ -27,10 +27,7 @@ class Game {
     fun isPlayable() = howManyPlayers() >= 2
 
     fun add(playerName: String): Boolean {
-        val newPlayer = Player(playerName)
-        players.add(newPlayer)
-
-        println(newPlayer.name + " was added")
+        players.add(Player(playerName))
         println("They are player number " + players.size)
         return true
     }
@@ -143,6 +140,9 @@ class Game {
 }
 
 private class Player(val name: String) {
+    init {
+        println(name + " was added")
+    }
     var place: Int = 0
         private set
 
