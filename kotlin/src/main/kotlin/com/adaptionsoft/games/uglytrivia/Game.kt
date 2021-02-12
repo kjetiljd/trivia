@@ -15,14 +15,14 @@ class Game {
 
     init {
         for (i in 0..49) {
-            popQuestions.addLast("Pop Question " + i)
-            scienceQuestions.addLast("Science Question " + i)
-            sportsQuestions.addLast("Sports Question " + i)
+            popQuestions.addLast("Pop Question $i")
+            scienceQuestions.addLast("Science Question $i")
+            sportsQuestions.addLast("Sports Question $i")
             rockQuestions.addLast(createRockQuestion(i))
         }
     }
 
-    fun createRockQuestion(index: Int) = "Rock Question " + index
+    fun createRockQuestion(index: Int) = "Rock Question $index"
 
     fun isPlayable() = howManyPlayers() >= 2
 
@@ -35,32 +35,28 @@ class Game {
     fun howManyPlayers() = players.size
 
     fun roll(roll: Int) {
-        println(players[currentPlayer].name + " is the current player")
-        println("They have rolled a " + roll)
+        println("${players[currentPlayer].name} is the current player")
+        println("They have rolled a $roll")
 
         if (players[currentPlayer].inPenaltyBox) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true
 
-                println(players[currentPlayer].name + " is getting out of the penalty box")
+                println("${players[currentPlayer].name} is getting out of the penalty box")
                 players[currentPlayer].move(roll)
 
-                println(players[currentPlayer].name
-                        + "'s new location is "
-                        + players[currentPlayer].place)
-                println("The category is " + currentCategory(players[currentPlayer].place))
+                println("${players[currentPlayer].name}'s new location is ${players[currentPlayer].place}")
+                println("The category is ${currentCategory(players[currentPlayer].place)}")
                 askQuestion(currentCategory(players[currentPlayer].place))
             } else {
-                println(players[currentPlayer].name + " is not getting out of the penalty box")
+                println("${players[currentPlayer].name} is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
             }
         } else {
             players[currentPlayer].move(roll)
 
-            println(players[currentPlayer].name
-                    + "'s new location is "
-                    + players[currentPlayer].place)
-            println("The category is " + currentCategory(players[currentPlayer].place))
+            println("${players[currentPlayer].name}'s new location is ${players[currentPlayer].place}")
+            println("The category is ${currentCategory(players[currentPlayer].place)}")
             askQuestion(currentCategory(players[currentPlayer].place))
         }
 
@@ -95,12 +91,7 @@ class Game {
             if (isGettingOutOfPenaltyBox) {
                 println("Answer was correct!!!!")
                 players[currentPlayer].addCoin()
-                println(
-                    players[currentPlayer].name
-                            + " now has "
-                            + players[currentPlayer].purse
-                            + " Gold Coins."
-                )
+                println("${players[currentPlayer].name} now has ${players[currentPlayer].purse} Gold Coins.")
 
                 val winner = !players[currentPlayer].playerWon()
                 currentPlayer++
@@ -114,12 +105,7 @@ class Game {
         } else {
             println("Answer was corrent!!!!")
             players[currentPlayer].addCoin()
-            println(
-                players[currentPlayer].name
-                        + " now has "
-                        + players[currentPlayer].purse
-                        + " Gold Coins."
-            )
+            println("${players[currentPlayer].name} now has ${players[currentPlayer].purse} Gold Coins.")
 
             val winner = !players[currentPlayer].playerWon()
             currentPlayer++
@@ -130,7 +116,7 @@ class Game {
 
     fun wrongAnswer(): Boolean {
         println("Question was incorrectly answered")
-        println(players[currentPlayer].name + " was sent to the penalty box")
+        println("${players[currentPlayer].name} was sent to the penalty box")
         players[currentPlayer].inPenaltyBox = true
 
         currentPlayer++
@@ -141,7 +127,7 @@ class Game {
 
 private class Player(val name: String) {
     init {
-        println(name + " was added")
+        println("$name was added")
     }
     var place: Int = 0
         private set
