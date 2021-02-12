@@ -30,8 +30,6 @@ class Game {
     fun isPlayable() = howManyPlayers() >= 2
 
     fun add(playerName: String): Boolean {
-
-
         players.add(playerName)
         places[howManyPlayers()] = 0
         purses[howManyPlayers()] = 0
@@ -65,9 +63,7 @@ class Game {
                 println(players[currentPlayer].toString() + " is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
             }
-
         } else {
-
             places[currentPlayer] = places[currentPlayer] + roll
             if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
 
@@ -117,17 +113,13 @@ class Game {
                 val winner = didPlayerWin()
                 currentPlayer++
                 if (currentPlayer == players.size) currentPlayer = 0
-
                 return winner
             } else {
                 currentPlayer++
                 if (currentPlayer == players.size) currentPlayer = 0
                 return true
             }
-
-
         } else {
-
             println("Answer was corrent!!!!")
             purses[currentPlayer]++
             println(players[currentPlayer].toString()
@@ -138,7 +130,6 @@ class Game {
             val winner = didPlayerWin()
             currentPlayer++
             if (currentPlayer == players.size) currentPlayer = 0
-
             return winner
         }
     }
