@@ -103,4 +103,21 @@ internal class GameTest {
         assertFalse(!game.wasCorrectlyAnswered())
         assertTrue(!game.wasCorrectlyAnswered())
     }
+
+    @Test
+    fun `wrong answer puts player in penalty box`() {
+        val game = Game()
+        game.add("Anita")
+
+        val actual = tapSystemOut {
+            game.wrongAnswer()
+        }
+
+        val expected = """
+            Question was incorrectly answered
+            Anita was sent to the penalty box
+            
+        """.trimIndent()
+        assertEquals(expected, actual)
+    }
 }
