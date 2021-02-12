@@ -25,13 +25,9 @@ class Game {
         }
     }
 
-    fun createRockQuestion(index: Int): String {
-        return "Rock Question " + index
-    }
+    fun createRockQuestion(index: Int) = "Rock Question " + index
 
-    fun isPlayable(): Boolean {
-        return howManyPlayers() >= 2
-    }
+    fun isPlayable() = howManyPlayers() >= 2
 
     fun add(playerName: String): Boolean {
 
@@ -46,9 +42,7 @@ class Game {
         return true
     }
 
-    fun howManyPlayers(): Int {
-        return players.size
-    }
+    fun howManyPlayers() = players.size
 
     fun roll(roll: Int) {
         println(players[currentPlayer].toString() + " is the current player")
@@ -159,7 +153,5 @@ class Game {
         return true
     }
 
-    private fun didPlayerWin(): Boolean {
-        return purses[currentPlayer] != 6
-    }
+    private fun didPlayerWin() = purses[currentPlayer] != 6
 }
