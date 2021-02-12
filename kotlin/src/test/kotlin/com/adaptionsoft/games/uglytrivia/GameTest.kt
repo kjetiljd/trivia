@@ -93,15 +93,14 @@ internal class GameTest {
 
     @Test
     fun `six correct answers win`() {
-        // given
         val game = Game()
         game.add("One")
 
-        // when
-        game.wasCorrectlyAnswered()
-        val playerDidWin = game.wasCorrectlyAnswered()
-
-        // then
-        assertTrue(playerDidWin)
+        assertFalse(!game.wasCorrectlyAnswered())
+        assertFalse(!game.wasCorrectlyAnswered())
+        assertFalse(!game.wasCorrectlyAnswered())
+        assertFalse(!game.wasCorrectlyAnswered())
+        assertFalse(!game.wasCorrectlyAnswered())
+        assertTrue(!game.wasCorrectlyAnswered())
     }
 }
