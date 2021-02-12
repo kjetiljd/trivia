@@ -151,6 +151,8 @@ private class Player(val name: String) {
     var purse: Int = 0
         private set
 
+    var inPenaltyBox = false
+
     fun move(roll: Int) {
         place += roll
         if (place > 11) place -= 12
