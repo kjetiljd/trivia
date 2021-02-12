@@ -50,8 +50,7 @@ class Game {
                 isGettingOutOfPenaltyBox = true
 
                 println(players[currentPlayer].name + " is getting out of the penalty box")
-                players[currentPlayer].place = players[currentPlayer].place + roll
-                if (players[currentPlayer].place > 11) players[currentPlayer].place = players[currentPlayer].place - 12
+                move(players[currentPlayer], roll)
 
                 println(players[currentPlayer].name
                         + "'s new location is "
@@ -63,8 +62,7 @@ class Game {
                 isGettingOutOfPenaltyBox = false
             }
         } else {
-            players[currentPlayer].place = players[currentPlayer].place + roll
-            if (players[currentPlayer].place > 11) players[currentPlayer].place = players[currentPlayer].place - 12
+            move(players[currentPlayer], roll)
 
             println(players[currentPlayer].name
                     + "'s new location is "
@@ -73,6 +71,11 @@ class Game {
             askQuestion()
         }
 
+    }
+
+    private fun move(player: Player, roll: Int) {
+        player.place = player.place + roll
+        if (player.place > 11) player.place = player.place - 12
     }
 
     private fun askQuestion() {
