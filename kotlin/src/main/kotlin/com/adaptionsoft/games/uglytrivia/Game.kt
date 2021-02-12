@@ -3,7 +3,7 @@ package com.adaptionsoft.games.uglytrivia
 import java.util.*
 
 class Game {
-    private val players = ArrayList<Any>()
+    private val players = ArrayList<Player>()
     private val places = IntArray(6)
     private val purses = IntArray(6)
     private val inPenaltyBox = BooleanArray(6)
@@ -30,12 +30,13 @@ class Game {
     fun isPlayable() = howManyPlayers() >= 2
 
     fun add(playerName: String): Boolean {
-        players.add(playerName)
+        val newPlayer = Player(playerName)
+        players.add(newPlayer)
         places[howManyPlayers()] = 0
         purses[howManyPlayers()] = 0
         inPenaltyBox[howManyPlayers()] = false
 
-        println(playerName + " was added")
+        println(newPlayer.name + " was added")
         println("They are player number " + players.size)
         return true
     }
@@ -43,31 +44,31 @@ class Game {
     fun howManyPlayers() = players.size
 
     fun roll(roll: Int) {
-        println(players[currentPlayer].toString() + " is the current player")
+        println(players[currentPlayer].name + " is the current player")
         println("They have rolled a " + roll)
 
         if (inPenaltyBox[currentPlayer]) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true
 
-                println(players[currentPlayer].toString() + " is getting out of the penalty box")
+                println(players[currentPlayer].name + " is getting out of the penalty box")
                 places[currentPlayer] = places[currentPlayer] + roll
                 if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
 
-                println(players[currentPlayer].toString()
+                println(players[currentPlayer].name
                         + "'s new location is "
                         + places[currentPlayer])
                 println("The category is " + currentCategory())
                 askQuestion()
             } else {
-                println(players[currentPlayer].toString() + " is not getting out of the penalty box")
+                println(players[currentPlayer].name + " is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
             }
         } else {
             places[currentPlayer] = places[currentPlayer] + roll
             if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
 
-            println(players[currentPlayer].toString()
+            println(players[currentPlayer].name
                     + "'s new location is "
                     + places[currentPlayer])
             println("The category is " + currentCategory())
@@ -105,7 +106,7 @@ class Game {
             if (isGettingOutOfPenaltyBox) {
                 println("Answer was correct!!!!")
                 purses[currentPlayer]++
-                println(players[currentPlayer].toString()
+                println(players[currentPlayer].name
                         + " now has "
                         + purses[currentPlayer]
                         + " Gold Coins.")
@@ -122,7 +123,7 @@ class Game {
         } else {
             println("Answer was corrent!!!!")
             purses[currentPlayer]++
-            println(players[currentPlayer].toString()
+            println(players[currentPlayer].name
                     + " now has "
                     + purses[currentPlayer]
                     + " Gold Coins.")
@@ -136,7 +137,7 @@ class Game {
 
     fun wrongAnswer(): Boolean {
         println("Question was incorrectly answered")
-        println(players[currentPlayer].toString() + " was sent to the penalty box")
+        println(players[currentPlayer].name + " was sent to the penalty box")
         inPenaltyBox[currentPlayer] = true
 
         currentPlayer++
@@ -147,6 +148,4 @@ class Game {
     private fun didPlayerWin() = purses[currentPlayer] != 6
 }
 
-private class Player {
-
-}
+private class Player(val name: String)
