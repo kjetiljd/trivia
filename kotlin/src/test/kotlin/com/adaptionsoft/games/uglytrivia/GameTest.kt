@@ -181,6 +181,24 @@ internal class GameTest {
         assertEquals("Pop", categoryFrom(tapSystemOut { game.roll(1) }))
     }
 
+    @Test
+    fun `player gets out of penalty box if a correct answer`() {
+        val game = Game()
+        game.add("Anita")
+        game.wrongAnswer()
+        game.roll(3)
+        val actual = tapSystemOut {
+            game.wasCorrectlyAnswered()
+        }
+
+        val expected = """
+            Answer was correct!!!!
+            Anita now has 1 Gold Coins.
+            
+        """.trimIndent()
+        assertEquals(expected, actual)
+    }
+
     private fun categoryFrom(output: String) = output
         .split("\n")
         .first { it.startsWith("The category is ") }
