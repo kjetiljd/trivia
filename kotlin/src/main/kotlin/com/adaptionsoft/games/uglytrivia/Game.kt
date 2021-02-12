@@ -91,7 +91,6 @@ class Game {
             if (isGettingOutOfPenaltyBox) {
                 println("Answer was correct!!!!")
                 players[currentPlayer].addCoin()
-                println("${players[currentPlayer].name} now has ${players[currentPlayer].purse} Gold Coins.")
 
                 val winner = !players[currentPlayer].playerWon()
                 currentPlayer++
@@ -105,7 +104,6 @@ class Game {
         } else {
             println("Answer was corrent!!!!")
             players[currentPlayer].addCoin()
-            println("${players[currentPlayer].name} now has ${players[currentPlayer].purse} Gold Coins.")
 
             val winner = !players[currentPlayer].playerWon()
             currentPlayer++
@@ -144,6 +142,7 @@ private class Player(val name: String) {
 
     fun addCoin() {
         purse++
+        println("$name now has $purse Gold Coins.")
     }
 
     fun playerWon() = purse == 6
