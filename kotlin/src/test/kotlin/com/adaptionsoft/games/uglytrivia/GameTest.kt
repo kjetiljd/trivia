@@ -161,4 +161,22 @@ internal class GameTest {
         """.trimIndent()
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun `each board position has a question type`() {
+        val game = Game()
+        game.add("Anita")
+
+        val output = tapSystemOut {
+            game.roll(1)
+        }
+        val actual =
+            output
+                .split("\n")
+                .first { it.startsWith("The category is ") }
+                .split(" ")
+                .last()
+
+        assertEquals("Science", actual)
+    }
 }
