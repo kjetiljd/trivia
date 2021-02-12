@@ -66,7 +66,7 @@ internal class GameTest {
     @Test
     fun `howManyPlayers keeps track of players`() {
         val game = Game()
-        
+
         game.add("One")
         game.add("Two")
         game.add("Three")
@@ -74,5 +74,20 @@ internal class GameTest {
         game.add("Five")
 
         assertEquals(5, game.howManyPlayers())
+    }
+
+    @Test
+    fun `game crashes on six players`() {
+        val game = Game()
+
+        game.add("One")
+        game.add("Two")
+        game.add("Three")
+        game.add("Four")
+        game.add("Five")
+
+        assertThrows(IndexOutOfBoundsException::class.java) {
+            game.add("Six")
+        }
     }
 }
