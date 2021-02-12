@@ -148,7 +148,7 @@ private class Player(val name: String) {
     var place: Int = 0
 
     fun move(roll: Int) {
-        place = place + roll
-        if (place > 11) place = place - 12
+        place += roll
+        if (place > 11) place -= 12
     }
 }
