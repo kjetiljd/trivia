@@ -25,6 +25,23 @@ internal class GameTest {
     }
 
     @Test
+    fun `add announces new player`() {
+        val game = Game()
+
+        val actual = tapSystemOut {
+            game.add("Anita")
+        }
+
+        val expected = """
+            Anita was added
+            They are player number 1
+            
+        """.trimIndent()
+
+        assertEquals(expected, actual)
+    }
+
+    @Test
     fun `roll announces player, roll and question`() {
         val game = Game()
         game.add("Anita")
