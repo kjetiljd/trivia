@@ -139,4 +139,26 @@ internal class GameTest {
         """.trimIndent()
         assertEquals(expected, actual)
     }
+
+    @Test
+    fun `player in penalty box gets out with an odd roll`() {
+        val game = Game()
+        game.add("Anita")
+        game.wrongAnswer()
+
+        val actual = tapSystemOut {
+            game.roll(3)
+        }
+
+        val expected = """
+             Anita is the current player
+             They have rolled a 3
+             Anita is getting out of the penalty box
+             Anita's new location is 3
+             The category is Rock
+             Rock Question 0
+             
+        """.trimIndent()
+        assertEquals(expected, actual)
+    }
 }
