@@ -4,7 +4,6 @@ import java.util.*
 
 class Game {
     private val players = ArrayList<Player>()
-    private val purses = IntArray(6)
     private val inPenaltyBox = BooleanArray(6)
 
     private val popQuestions = LinkedList<Any>()
@@ -31,7 +30,6 @@ class Game {
     fun add(playerName: String): Boolean {
         val newPlayer = Player(playerName)
         players.add(newPlayer)
-        purses[howManyPlayers()] = 0
         inPenaltyBox[howManyPlayers()] = false
 
         println(newPlayer.name + " was added")
@@ -101,10 +99,10 @@ class Game {
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
                 println("Answer was correct!!!!")
-                purses[currentPlayer]++
+                players[currentPlayer].addCoin()
                 println(players[currentPlayer].name
                         + " now has "
-                        + purses[currentPlayer]
+                        + players[currentPlayer].purse
                         + " Gold Coins.")
 
                 val winner = didPlayerWin()
@@ -118,10 +116,10 @@ class Game {
             }
         } else {
             println("Answer was corrent!!!!")
-            purses[currentPlayer]++
+            players[currentPlayer].addCoin()
             println(players[currentPlayer].name
                     + " now has "
-                    + purses[currentPlayer]
+                    + players[currentPlayer].purse
                     + " Gold Coins.")
 
             val winner = didPlayerWin()
@@ -141,15 +139,22 @@ class Game {
         return true
     }
 
-    private fun didPlayerWin() = purses[currentPlayer] != 6
+    private fun didPlayerWin() = players[currentPlayer].purse != 6
 }
 
 private class Player(val name: String) {
     var place: Int = 0
         private set
 
+    var purse: Int = 0
+        private set
+
     fun move(roll: Int) {
         place += roll
         if (place > 11) place -= 12
+    }
+
+    fun addCoin() {
+        purse++
     }
 }
