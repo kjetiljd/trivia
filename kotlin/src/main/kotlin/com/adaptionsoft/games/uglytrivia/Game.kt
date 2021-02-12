@@ -146,6 +146,7 @@ class Game {
 
 private class Player(val name: String) {
     var place: Int = 0
+        private set
 
     fun move(roll: Int) {
         place += roll
