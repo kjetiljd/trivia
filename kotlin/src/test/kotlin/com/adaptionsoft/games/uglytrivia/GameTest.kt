@@ -71,18 +71,14 @@ internal class GameTest {
     }
 
     @Test
-    fun `game crashes on six players`() {
+    fun `game can add six players`() {
         val game = Game()
-
         game.add("One")
         game.add("Two")
         game.add("Three")
         game.add("Four")
         game.add("Five")
-
-        assertThrows(IndexOutOfBoundsException::class.java) {
-            game.add("Six")
-        }
+        game.add("Six")
     }
 
     @Test

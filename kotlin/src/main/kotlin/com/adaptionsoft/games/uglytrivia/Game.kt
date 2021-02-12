@@ -27,7 +27,6 @@ class Game {
     fun isPlayable() = howManyPlayers() >= 2
 
     fun add(playerName: String): Boolean {
-        if (howManyPlayers() == 5) throw IndexOutOfBoundsException()
         val newPlayer = Player(playerName)
         players.add(newPlayer)
 
