@@ -3,15 +3,15 @@ package com.adaptionsoft.games.uglytrivia
 import java.util.*
 
 class Game {
-    private var players = ArrayList<Any>()
-    private var places = IntArray(6)
-    private var purses = IntArray(6)
-    private var inPenaltyBox = BooleanArray(6)
+    private val players = ArrayList<Any>()
+    private val places = IntArray(6)
+    private val purses = IntArray(6)
+    private val inPenaltyBox = BooleanArray(6)
 
-    private var popQuestions = LinkedList<Any>()
-    private var scienceQuestions = LinkedList<Any>()
-    private var sportsQuestions = LinkedList<Any>()
-    private var rockQuestions = LinkedList<Any>()
+    private val popQuestions = LinkedList<Any>()
+    private val scienceQuestions = LinkedList<Any>()
+    private val sportsQuestions = LinkedList<Any>()
+    private val rockQuestions = LinkedList<Any>()
 
     private var currentPlayer = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
