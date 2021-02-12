@@ -1,5 +1,6 @@
 package com.adaptionsoft.games.uglytrivia
 
+import com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOut
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -22,5 +23,27 @@ internal class GameTest {
         game.add("Kenny")
         assertTrue(game.isPlayable())
 
+    }
+
+    @Test
+    fun `roll announces player, roll and question`() {
+        val game = Game()
+        game.add("Anita")
+        game.add("Ben")
+
+        val actual = tapSystemOut {
+            game.roll(1)
+        }
+
+        val expected = """
+            Anita is the current player
+            They have rolled a 1
+            Anita's new location is 1
+            The category is Science
+            Science Question 0
+            
+        """.trimIndent()
+
+        assertEquals(expected, actual)
     }
 }
