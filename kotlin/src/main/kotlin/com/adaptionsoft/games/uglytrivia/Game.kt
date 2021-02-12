@@ -105,7 +105,7 @@ class Game {
                         + players[currentPlayer].purse
                         + " Gold Coins.")
 
-                val winner = didPlayerWin()
+                val winner = players[currentPlayer].didPlayerWin()
                 currentPlayer++
                 if (currentPlayer == players.size) currentPlayer = 0
                 return winner
@@ -122,7 +122,7 @@ class Game {
                     + players[currentPlayer].purse
                     + " Gold Coins.")
 
-            val winner = didPlayerWin()
+            val winner = players[currentPlayer].didPlayerWin()
             currentPlayer++
             if (currentPlayer == players.size) currentPlayer = 0
             return winner
@@ -138,8 +138,6 @@ class Game {
         if (currentPlayer == players.size) currentPlayer = 0
         return true
     }
-
-    private fun didPlayerWin() = players[currentPlayer].purse != 6
 }
 
 private class Player(val name: String) {
@@ -157,4 +155,6 @@ private class Player(val name: String) {
     fun addCoin() {
         purse++
     }
+
+    fun didPlayerWin() = purse != 6
 }
