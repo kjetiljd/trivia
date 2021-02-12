@@ -90,4 +90,18 @@ internal class GameTest {
             game.add("Six")
         }
     }
+
+    @Test
+    fun `six correct answers win`() {
+        // given
+        val game = Game()
+        game.add("One")
+
+        // when
+        game.wasCorrectlyAnswered()
+        val playerDidWin = game.wasCorrectlyAnswered()
+
+        // then
+        assertTrue(playerDidWin)
+    }
 }
