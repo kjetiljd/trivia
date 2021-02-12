@@ -213,6 +213,11 @@ internal class GameTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun `check createRockQuestion`() {
+        assertEquals("Rock Question 15", Game().createRockQuestion(15))
+    }
+
     private fun categoryFrom(output: String) = output
         .split("\n")
         .first { it.startsWith("The category is ") }
