@@ -170,13 +170,14 @@ internal class GameTest {
         val output = tapSystemOut {
             game.roll(1)
         }
-        val actual =
-            output
-                .split("\n")
-                .first { it.startsWith("The category is ") }
-                .split(" ")
-                .last()
-
+        val actual = categoryFrom(output)
+        
         assertEquals("Science", actual)
     }
+
+    private fun categoryFrom(output: String) = output
+        .split("\n")
+        .first { it.startsWith("The category is ") }
+        .split(" ")
+        .last()
 }
