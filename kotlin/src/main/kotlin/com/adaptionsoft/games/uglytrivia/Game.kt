@@ -4,7 +4,6 @@ import java.util.*
 
 class Game {
     private val players = ArrayList<Player>()
-    private val places = IntArray(6)
     private val purses = IntArray(6)
     private val inPenaltyBox = BooleanArray(6)
 
@@ -32,7 +31,6 @@ class Game {
     fun add(playerName: String): Boolean {
         val newPlayer = Player(playerName)
         players.add(newPlayer)
-        places[howManyPlayers()] = 0
         purses[howManyPlayers()] = 0
         inPenaltyBox[howManyPlayers()] = false
 
@@ -52,12 +50,12 @@ class Game {
                 isGettingOutOfPenaltyBox = true
 
                 println(players[currentPlayer].name + " is getting out of the penalty box")
-                places[currentPlayer] = places[currentPlayer] + roll
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
+                players[currentPlayer].place = players[currentPlayer].place + roll
+                if (players[currentPlayer].place > 11) players[currentPlayer].place = players[currentPlayer].place - 12
 
                 println(players[currentPlayer].name
                         + "'s new location is "
-                        + places[currentPlayer])
+                        + players[currentPlayer].place)
                 println("The category is " + currentCategory())
                 askQuestion()
             } else {
@@ -65,12 +63,12 @@ class Game {
                 isGettingOutOfPenaltyBox = false
             }
         } else {
-            places[currentPlayer] = places[currentPlayer] + roll
-            if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
+            players[currentPlayer].place = players[currentPlayer].place + roll
+            if (players[currentPlayer].place > 11) players[currentPlayer].place = players[currentPlayer].place - 12
 
             println(players[currentPlayer].name
                     + "'s new location is "
-                    + places[currentPlayer])
+                    + players[currentPlayer].place)
             println("The category is " + currentCategory())
             askQuestion()
         }
@@ -89,15 +87,15 @@ class Game {
     }
 
     private fun currentCategory(): String {
-        if (places[currentPlayer] == 0) return "Pop"
-        if (places[currentPlayer] == 4) return "Pop"
-        if (places[currentPlayer] == 8) return "Pop"
-        if (places[currentPlayer] == 1) return "Science"
-        if (places[currentPlayer] == 5) return "Science"
-        if (places[currentPlayer] == 9) return "Science"
-        if (places[currentPlayer] == 2) return "Sports"
-        if (places[currentPlayer] == 6) return "Sports"
-        if (places[currentPlayer] == 10) return "Sports"
+        if (players[currentPlayer].place == 0) return "Pop"
+        if (players[currentPlayer].place == 4) return "Pop"
+        if (players[currentPlayer].place == 8) return "Pop"
+        if (players[currentPlayer].place == 1) return "Science"
+        if (players[currentPlayer].place == 5) return "Science"
+        if (players[currentPlayer].place == 9) return "Science"
+        if (players[currentPlayer].place == 2) return "Sports"
+        if (players[currentPlayer].place == 6) return "Sports"
+        if (players[currentPlayer].place == 10) return "Sports"
         return "Rock"
     }
 
@@ -148,4 +146,6 @@ class Game {
     private fun didPlayerWin() = purses[currentPlayer] != 6
 }
 
-private class Player(val name: String)
+private class Player(val name: String) {
+    var place: Int = 0
+}
