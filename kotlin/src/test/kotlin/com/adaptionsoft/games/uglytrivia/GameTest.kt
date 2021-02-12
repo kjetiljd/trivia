@@ -199,6 +199,20 @@ internal class GameTest {
         assertEquals(expected, actual)
     }
 
+    @Test
+    fun `player does not get out of penalty box after even roll even if a correct answer`() {
+        val game = Game()
+        game.add("Anita")
+        game.wrongAnswer()
+        game.roll(6)
+        val actual = tapSystemOut {
+            game.wasCorrectlyAnswered()
+        }
+
+        val expected = ""
+        assertEquals(expected, actual)
+    }
+
     private fun categoryFrom(output: String) = output
         .split("\n")
         .first { it.startsWith("The category is ") }
