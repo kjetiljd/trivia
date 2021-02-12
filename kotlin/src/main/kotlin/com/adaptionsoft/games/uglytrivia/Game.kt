@@ -48,7 +48,7 @@ class Game {
                 println(players[currentPlayer].name
                         + "'s new location is "
                         + players[currentPlayer].place)
-                println("The category is " + currentCategory())
+                println("The category is " + currentCategory(players[currentPlayer].place))
                 askQuestion()
             } else {
                 println(players[currentPlayer].name + " is not getting out of the penalty box")
@@ -60,33 +60,33 @@ class Game {
             println(players[currentPlayer].name
                     + "'s new location is "
                     + players[currentPlayer].place)
-            println("The category is " + currentCategory())
+            println("The category is " + currentCategory(players[currentPlayer].place))
             askQuestion()
         }
 
     }
 
     private fun askQuestion() {
-        if (currentCategory() === "Pop")
+        if (currentCategory(players[currentPlayer].place) === "Pop")
             println(popQuestions.removeFirst())
-        if (currentCategory() === "Science")
+        if (currentCategory(players[currentPlayer].place) === "Science")
             println(scienceQuestions.removeFirst())
-        if (currentCategory() === "Sports")
+        if (currentCategory(players[currentPlayer].place) === "Sports")
             println(sportsQuestions.removeFirst())
-        if (currentCategory() === "Rock")
+        if (currentCategory(players[currentPlayer].place) === "Rock")
             println(rockQuestions.removeFirst())
     }
 
-    private fun currentCategory(): String {
-        if (players[currentPlayer].place == 0) return "Pop"
-        if (players[currentPlayer].place == 4) return "Pop"
-        if (players[currentPlayer].place == 8) return "Pop"
-        if (players[currentPlayer].place == 1) return "Science"
-        if (players[currentPlayer].place == 5) return "Science"
-        if (players[currentPlayer].place == 9) return "Science"
-        if (players[currentPlayer].place == 2) return "Sports"
-        if (players[currentPlayer].place == 6) return "Sports"
-        if (players[currentPlayer].place == 10) return "Sports"
+    private fun currentCategory(place: Int): String {
+        if (place == 0) return "Pop"
+        if (place == 4) return "Pop"
+        if (place == 8) return "Pop"
+        if (place == 1) return "Science"
+        if (place == 5) return "Science"
+        if (place == 9) return "Science"
+        if (place == 2) return "Sports"
+        if (place == 6) return "Sports"
+        if (place == 10) return "Sports"
         return "Rock"
     }
 
