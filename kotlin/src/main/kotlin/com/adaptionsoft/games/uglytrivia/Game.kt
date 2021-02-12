@@ -4,7 +4,6 @@ import java.util.*
 
 class Game {
     private val players = ArrayList<Player>()
-    private val inPenaltyBox = BooleanArray(6)
 
     private val popQuestions = LinkedList<Any>()
     private val scienceQuestions = LinkedList<Any>()
@@ -28,9 +27,9 @@ class Game {
     fun isPlayable() = howManyPlayers() >= 2
 
     fun add(playerName: String): Boolean {
+        if (howManyPlayers() == 5) throw IndexOutOfBoundsException()
         val newPlayer = Player(playerName)
         players.add(newPlayer)
-        inPenaltyBox[howManyPlayers()] = false
 
         println(newPlayer.name + " was added")
         println("They are player number " + players.size)
@@ -43,7 +42,7 @@ class Game {
         println(players[currentPlayer].name + " is the current player")
         println("They have rolled a " + roll)
 
-        if (inPenaltyBox[currentPlayer]) {
+        if (players[currentPlayer].inPenaltyBox) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true
 
@@ -96,7 +95,7 @@ class Game {
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (inPenaltyBox[currentPlayer]) {
+        if (players[currentPlayer].inPenaltyBox) {
             if (isGettingOutOfPenaltyBox) {
                 println("Answer was correct!!!!")
                 players[currentPlayer].addCoin()
@@ -136,7 +135,7 @@ class Game {
     fun wrongAnswer(): Boolean {
         println("Question was incorrectly answered")
         println(players[currentPlayer].name + " was sent to the penalty box")
-        inPenaltyBox[currentPlayer] = true
+        players[currentPlayer].inPenaltyBox = true
 
         currentPlayer++
         if (currentPlayer == players.size) currentPlayer = 0
