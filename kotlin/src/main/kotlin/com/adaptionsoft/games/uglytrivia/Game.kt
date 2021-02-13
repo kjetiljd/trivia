@@ -3,7 +3,7 @@ package com.adaptionsoft.games.uglytrivia
 import java.util.*
 
 class Game {
-    private val players = ArrayList<Player>()
+    private val players = LinkedList<Player>()
 
     private val popQuestions = LinkedList<Any>()
     private val scienceQuestions = LinkedList<Any>()
@@ -120,6 +120,7 @@ class Game {
     private fun currentPlayer() = players[currentPlayerIndex]
 
     private fun nextPlayer() {
+
         currentPlayerIndex++
         if (currentPlayerIndex == players.size) currentPlayerIndex = 0
     }
