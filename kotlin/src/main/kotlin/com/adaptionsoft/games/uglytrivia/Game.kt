@@ -34,29 +34,29 @@ class Game {
     fun howManyPlayers() = players.size
 
     fun roll(roll: Int) {
-        println("${players[currentPlayerIndex].name} is the current player")
+        println("${currentPlayer().name} is the current player")
         println("They have rolled a $roll")
 
-        if (players[currentPlayerIndex].inPenaltyBox) {
+        if (currentPlayer().inPenaltyBox) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true
 
-                println("${players[currentPlayerIndex].name} is getting out of the penalty box")
-                players[currentPlayerIndex].move(roll)
+                println("${currentPlayer().name} is getting out of the penalty box")
+                currentPlayer().move(roll)
 
-                println("${players[currentPlayerIndex].name}'s new location is ${players[currentPlayerIndex].place}")
-                println("The category is ${currentCategory(players[currentPlayerIndex].place)}")
-                askQuestion(currentCategory(players[currentPlayerIndex].place))
+                println("${currentPlayer().name}'s new location is ${currentPlayer().place}")
+                println("The category is ${currentCategory(currentPlayer().place)}")
+                askQuestion(currentCategory(currentPlayer().place))
             } else {
-                println("${players[currentPlayerIndex].name} is not getting out of the penalty box")
+                println("${currentPlayer().name} is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
             }
         } else {
-            players[currentPlayerIndex].move(roll)
+            currentPlayer().move(roll)
 
-            println("${players[currentPlayerIndex].name}'s new location is ${players[currentPlayerIndex].place}")
-            println("The category is ${currentCategory(players[currentPlayerIndex].place)}")
-            askQuestion(currentCategory(players[currentPlayerIndex].place))
+            println("${currentPlayer().name}'s new location is ${currentPlayer().place}")
+            println("The category is ${currentCategory(currentPlayer().place)}")
+            askQuestion(currentCategory(currentPlayer().place))
         }
 
     }
@@ -86,12 +86,12 @@ class Game {
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (players[currentPlayerIndex].inPenaltyBox) {
+        if (currentPlayer().inPenaltyBox) {
             if (isGettingOutOfPenaltyBox) {
                 println("Answer was correct!!!!")
-                players[currentPlayerIndex].addCoin()
+                currentPlayer().addCoin()
 
-                val noWinnerYet = !players[currentPlayerIndex].playerWon()
+                val noWinnerYet = !currentPlayer().playerWon()
                 nextPlayer()
                 return noWinnerYet
             } else {
@@ -100,9 +100,9 @@ class Game {
             }
         } else {
             println("Answer was corrent!!!!")
-            players[currentPlayerIndex].addCoin()
+            currentPlayer().addCoin()
 
-            val noWinnerYet = !players[currentPlayerIndex].playerWon()
+            val noWinnerYet = !currentPlayer().playerWon()
             nextPlayer()
             return noWinnerYet
         }
@@ -110,12 +110,14 @@ class Game {
 
     fun wrongAnswer(): Boolean {
         println("Question was incorrectly answered")
-        println("${players[currentPlayerIndex].name} was sent to the penalty box")
-        players[currentPlayerIndex].inPenaltyBox = true
+        println("${currentPlayer().name} was sent to the penalty box")
+        currentPlayer().inPenaltyBox = true
 
         nextPlayer()
         return true
     }
+
+    private fun currentPlayer() = players[currentPlayerIndex]
 
     private fun nextPlayer() {
         currentPlayerIndex++
