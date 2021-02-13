@@ -76,26 +76,15 @@ class Game {
         }.also { println("The category is $it") }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (currentPlayer().inPenaltyBox) {
-            if (isGettingOutOfPenaltyBox) {
-                println("Answer was correct!!!!")
-                currentPlayer().addCoin()
-
-                val noWinnerYet = !currentPlayer().playerWon()
-                nextPlayer()
-                return noWinnerYet
-            } else {
-                nextPlayer()
-                return true
-            }
-        } else {
-            println("Answer was corrent!!!!")
+        var noWinnerYet = true
+        if (!currentPlayer().inPenaltyBox || isGettingOutOfPenaltyBox) {
+            println("Answer was correct!!!!")
             currentPlayer().addCoin()
 
-            val noWinnerYet = !currentPlayer().playerWon()
-            nextPlayer()
-            return noWinnerYet
+            noWinnerYet = !currentPlayer().playerWon()
         }
+        nextPlayer()
+        return noWinnerYet
     }
 
     fun wrongAnswer(): Boolean {
@@ -110,7 +99,6 @@ class Game {
     private fun currentPlayer() = players[currentPlayerIndex]
 
     private fun nextPlayer() {
-
         currentPlayerIndex++
         if (currentPlayerIndex == players.size) currentPlayerIndex = 0
     }
