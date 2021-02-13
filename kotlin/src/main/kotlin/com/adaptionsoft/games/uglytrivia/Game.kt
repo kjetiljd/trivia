@@ -26,10 +26,9 @@ class Game {
 
     fun isPlayable() = howManyPlayers() >= 2
 
-    fun add(playerName: String): Boolean {
+    fun add(playerName: String) {
         players.add(Player(playerName))
         println("They are player number " + players.size)
-        return true
     }
 
     fun howManyPlayers() = players.size
