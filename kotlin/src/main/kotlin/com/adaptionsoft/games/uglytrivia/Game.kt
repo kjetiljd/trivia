@@ -19,7 +19,7 @@ class Game {
     fun howManyPlayers() = players.size
 
     fun roll(roll: Int) {
-        players.current().announceCurrent()
+        players.announceCurrent()
         println("They have rolled a $roll")
 
         if (players.current().inPenaltyBox) {
@@ -75,6 +75,10 @@ private class Players {
     fun add(player: Player) {
         players.add(player)
         println("They are player number " + players.size)
+    }
+
+    fun announceCurrent() {
+        current().announceCurrent()
     }
 
     fun current() = players[currentPlayerIndex]
