@@ -3,10 +3,9 @@ package com.adaptionsoft.games.uglytrivia
 import java.util.*
 
 class Game {
-    private val players = LinkedList<Player>()
+    private val players = Players()
     private val questions = Questions()
 
-    private var currentPlayerIndex = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
 
     fun createRockQuestion(index: Int) = questions.createRockQuestion(index)
@@ -15,62 +14,76 @@ class Game {
 
     fun add(playerName: String) {
         players.add(Player(playerName))
-        println("They are player number " + players.size)
     }
 
     fun howManyPlayers() = players.size
 
     fun roll(roll: Int) {
-        currentPlayer().announceCurrent()
+        players.current().announceCurrent()
         println("They have rolled a $roll")
 
-        if (currentPlayer().inPenaltyBox) {
+        if (players.current().inPenaltyBox) {
             isGettingOutOfPenaltyBox = roll % 2 != 0
             if (!isGettingOutOfPenaltyBox) {
-                println("${currentPlayer().name} is not getting out of the penalty box")
+                println("${players.current().name} is not getting out of the penalty box")
                 return
             }
-            println("${currentPlayer().name} is getting out of the penalty box")
+            println("${players.current().name} is getting out of the penalty box")
         }
-        currentPlayer().move(roll)
-        questions.askQuestion(currentCategory(currentPlayer().place))
+        players.current().move(roll)
+        questions.askQuestion(Board.category(players.current().place))
     }
 
-    private fun currentCategory(place: Int) =
+    fun wasCorrectlyAnswered(): Boolean {
+        if (players.current().inPenaltyBox && !isGettingOutOfPenaltyBox) {
+            players.next()
+            return true
+        }
+
+        println("Answer was correct!!!!")
+        players.current().addCoin()
+
+        val noWinnerYet = !players.current().playerWon()
+        players.next()
+        return noWinnerYet
+    }
+
+    fun wrongAnswer(): Boolean {
+        println("Question was incorrectly answered")
+        players.current().sendToPenaltyBox()
+        players.next()
+        return true
+    }
+}
+
+private object Board {
+    fun category(place: Int) =
         when (place) {
             0, 4, 8 -> "Pop"
             1, 5, 9 -> "Science"
             2, 6, 10 -> "Sports"
             else -> "Rock"
         }.also { println("The category is $it") }
+}
 
-    fun wasCorrectlyAnswered(): Boolean {
-        if (currentPlayer().inPenaltyBox && !isGettingOutOfPenaltyBox) {
-            nextPlayer()
-            return true
-        }
+private class Players {
+    private val players = LinkedList<Player>()
+    private var currentPlayerIndex = 0
 
-        println("Answer was correct!!!!")
-        currentPlayer().addCoin()
+    val size get() = players.size
 
-        val noWinnerYet = !currentPlayer().playerWon()
-        nextPlayer()
-        return noWinnerYet
+    fun add(player: Player) {
+        players.add(player)
+        println("They are player number " + players.size)
     }
 
-    fun wrongAnswer(): Boolean {
-        println("Question was incorrectly answered")
-        currentPlayer().sendToPenaltyBox()
-        nextPlayer()
-        return true
-    }
+    fun current() = players[currentPlayerIndex]
 
-    private fun currentPlayer() = players[currentPlayerIndex]
-
-    private fun nextPlayer() {
+    fun next() {
         currentPlayerIndex++
         if (currentPlayerIndex == players.size) currentPlayerIndex = 0
     }
+
 }
 
 private class Player(val name: String) {
