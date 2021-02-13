@@ -4,25 +4,12 @@ import java.util.*
 
 class Game {
     private val players = LinkedList<Player>()
-
-    private val popQuestions = LinkedList<Any>()
-    private val scienceQuestions = LinkedList<Any>()
-    private val sportsQuestions = LinkedList<Any>()
-    private val rockQuestions = LinkedList<Any>()
+    private val questions = Questions()
 
     private var currentPlayerIndex = 0
     private var isGettingOutOfPenaltyBox: Boolean = false
 
-    init {
-        for (i in 0..49) {
-            popQuestions.addLast("Pop Question $i")
-            scienceQuestions.addLast("Science Question $i")
-            sportsQuestions.addLast("Sports Question $i")
-            rockQuestions.addLast(createRockQuestion(i))
-        }
-    }
-
-    fun createRockQuestion(index: Int) = "Rock Question $index"
+    fun createRockQuestion(index: Int) = questions.createRockQuestion(index)
 
     fun isPlayable() = howManyPlayers() >= 2
 
@@ -46,17 +33,7 @@ class Game {
             println("${currentPlayer().name} is getting out of the penalty box")
         }
         currentPlayer().move(roll)
-        askQuestion(currentCategory(currentPlayer().place))
-    }
-
-    private fun askQuestion(category: String) {
-        when(category) {
-            "Pop" -> popQuestions
-            "Science" -> scienceQuestions
-            "Sports" -> sportsQuestions
-            "Rock" -> rockQuestions
-            else -> throw IllegalArgumentException("Unknown category: $category")
-        }.apply { println(removeFirst()) }
+        questions.askQuestion(currentCategory(currentPlayer().place))
     }
 
     private fun currentCategory(place: Int) =
@@ -130,4 +107,33 @@ private class Player(val name: String) {
     }
 
     fun playerWon() = purse == 6
+}
+
+
+private class Questions {
+    private val popQuestions = LinkedList<Any>()
+    private val scienceQuestions = LinkedList<Any>()
+    private val sportsQuestions = LinkedList<Any>()
+    private val rockQuestions = LinkedList<Any>()
+
+    init {
+        for (i in 0..49) {
+            popQuestions.addLast("Pop Question $i")
+            scienceQuestions.addLast("Science Question $i")
+            sportsQuestions.addLast("Sports Question $i")
+            rockQuestions.addLast(createRockQuestion(i))
+        }
+    }
+
+    fun createRockQuestion(index: Int) = "Rock Question $index"
+
+    fun askQuestion(category: String) {
+        when(category) {
+            "Pop" -> popQuestions
+            "Science" -> scienceQuestions
+            "Sports" -> sportsQuestions
+            "Rock" -> rockQuestions
+            else -> throw IllegalArgumentException("Unknown category: $category")
+        }.apply { println(removeFirst()) }
+    }
 }
