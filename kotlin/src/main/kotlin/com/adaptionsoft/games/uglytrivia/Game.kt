@@ -58,14 +58,13 @@ class Game {
     }
 
     private fun askQuestion(category: String) {
-        if (category === "Pop")
-            println(popQuestions.removeFirst())
-        if (category === "Science")
-            println(scienceQuestions.removeFirst())
-        if (category === "Sports")
-            println(sportsQuestions.removeFirst())
-        if (category === "Rock")
-            println(rockQuestions.removeFirst())
+        when(category) {
+            "Pop" -> popQuestions
+            "Science" -> scienceQuestions
+            "Sports" -> sportsQuestions
+            "Rock" -> rockQuestions
+            else -> throw IllegalArgumentException("Unknown category: $category")
+        }.apply { println(removeFirst()) }
     }
 
     private fun currentCategory(place: Int) =
