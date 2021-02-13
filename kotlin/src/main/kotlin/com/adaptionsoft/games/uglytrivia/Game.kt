@@ -34,7 +34,7 @@ class Game {
     fun howManyPlayers() = players.size
 
     fun roll(roll: Int) {
-        println("${currentPlayer().name} is the current player")
+        currentPlayer().announceCurrent()
         println("They have rolled a $roll")
 
         if (currentPlayer().inPenaltyBox) {
@@ -44,8 +44,6 @@ class Game {
                 println("${currentPlayer().name} is getting out of the penalty box")
                 currentPlayer().move(roll)
 
-                println("${currentPlayer().name}'s new location is ${currentPlayer().place}")
-                println("The category is ${currentCategory(currentPlayer().place)}")
                 askQuestion(currentCategory(currentPlayer().place))
             } else {
                 println("${currentPlayer().name} is not getting out of the penalty box")
@@ -54,8 +52,6 @@ class Game {
         } else {
             currentPlayer().move(roll)
 
-            println("${currentPlayer().name}'s new location is ${currentPlayer().place}")
-            println("The category is ${currentCategory(currentPlayer().place)}")
             askQuestion(currentCategory(currentPlayer().place))
         }
 
@@ -72,18 +68,13 @@ class Game {
             println(rockQuestions.removeFirst())
     }
 
-    private fun currentCategory(place: Int): String {
-        if (place == 0) return "Pop"
-        if (place == 4) return "Pop"
-        if (place == 8) return "Pop"
-        if (place == 1) return "Science"
-        if (place == 5) return "Science"
-        if (place == 9) return "Science"
-        if (place == 2) return "Sports"
-        if (place == 6) return "Sports"
-        if (place == 10) return "Sports"
-        return "Rock"
-    }
+    private fun currentCategory(place: Int) =
+        when (place) {
+            0, 4, 8 -> "Pop"
+            1, 5, 9 -> "Science"
+            2, 6, 10 -> "Sports"
+            else -> "Rock"
+        }.also { println("The category is $it") }
 
     fun wasCorrectlyAnswered(): Boolean {
         if (currentPlayer().inPenaltyBox) {
@@ -130,6 +121,11 @@ private class Player(val name: String) {
     init {
         println("$name was added")
     }
+
+    fun announceCurrent() {
+        println("$name is the current player")
+    }
+
     var place: Int = 0
         private set
 
@@ -141,6 +137,7 @@ private class Player(val name: String) {
     fun move(roll: Int) {
         place += roll
         if (place > 11) place -= 12
+        println("$name's new location is $place")
     }
 
     fun addCoin() {
