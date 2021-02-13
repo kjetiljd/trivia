@@ -92,12 +92,10 @@ class Game {
                 players[currentPlayerIndex].addCoin()
 
                 val noWinnerYet = !players[currentPlayerIndex].playerWon()
-                currentPlayerIndex++
-                if (currentPlayerIndex == players.size) currentPlayerIndex = 0
+                nextPlayer()
                 return noWinnerYet
             } else {
-                currentPlayerIndex++
-                if (currentPlayerIndex == players.size) currentPlayerIndex = 0
+                nextPlayer()
                 return true
             }
         } else {
@@ -105,8 +103,7 @@ class Game {
             players[currentPlayerIndex].addCoin()
 
             val noWinnerYet = !players[currentPlayerIndex].playerWon()
-            currentPlayerIndex++
-            if (currentPlayerIndex == players.size) currentPlayerIndex = 0
+            nextPlayer()
             return noWinnerYet
         }
     }
@@ -116,9 +113,13 @@ class Game {
         println("${players[currentPlayerIndex].name} was sent to the penalty box")
         players[currentPlayerIndex].inPenaltyBox = true
 
+        nextPlayer()
+        return true
+    }
+
+    private fun nextPlayer() {
         currentPlayerIndex++
         if (currentPlayerIndex == players.size) currentPlayerIndex = 0
-        return true
     }
 }
 
