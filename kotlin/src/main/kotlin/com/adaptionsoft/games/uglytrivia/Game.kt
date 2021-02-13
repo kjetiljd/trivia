@@ -38,12 +38,11 @@ class Game {
         println("They have rolled a $roll")
 
         if (currentPlayer().inPenaltyBox) {
-            if (roll % 2 == 0) {
+            isGettingOutOfPenaltyBox = roll % 2 != 0
+            if (!isGettingOutOfPenaltyBox) {
                 println("${currentPlayer().name} is not getting out of the penalty box")
-                isGettingOutOfPenaltyBox = false
                 return
             }
-            isGettingOutOfPenaltyBox = true
             println("${currentPlayer().name} is getting out of the penalty box")
         }
         currentPlayer().move(roll)
@@ -86,7 +85,6 @@ class Game {
         println("Question was incorrectly answered")
         println("${currentPlayer().name} was sent to the penalty box")
         currentPlayer().inPenaltyBox = true
-
         nextPlayer()
         return true
     }
