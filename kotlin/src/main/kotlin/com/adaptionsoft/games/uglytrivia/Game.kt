@@ -108,8 +108,7 @@ private class Player(val name: String) {
     var place: Int = 0
         private set
 
-    var purse: Int = 0
-        private set
+    private var purse: Int = 0
 
     var inPenaltyBox = false
         private set
