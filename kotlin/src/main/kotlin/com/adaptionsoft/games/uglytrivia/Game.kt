@@ -38,23 +38,16 @@ class Game {
         println("They have rolled a $roll")
 
         if (currentPlayer().inPenaltyBox) {
-            if (roll % 2 != 0) {
-                isGettingOutOfPenaltyBox = true
-
-                println("${currentPlayer().name} is getting out of the penalty box")
-                currentPlayer().move(roll)
-
-                askQuestion(currentCategory(currentPlayer().place))
-            } else {
+            if (roll % 2 == 0) {
                 println("${currentPlayer().name} is not getting out of the penalty box")
                 isGettingOutOfPenaltyBox = false
+                return
             }
-        } else {
-            currentPlayer().move(roll)
-
-            askQuestion(currentCategory(currentPlayer().place))
+            isGettingOutOfPenaltyBox = true
+            println("${currentPlayer().name} is getting out of the penalty box")
         }
-
+        currentPlayer().move(roll)
+        askQuestion(currentCategory(currentPlayer().place))
     }
 
     private fun askQuestion(category: String) {
