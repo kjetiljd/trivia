@@ -83,8 +83,7 @@ class Game {
 
     fun wrongAnswer(): Boolean {
         println("Question was incorrectly answered")
-        println("${currentPlayer().name} was sent to the penalty box")
-        currentPlayer().inPenaltyBox = true
+        currentPlayer().sendToPenaltyBox()
         nextPlayer()
         return true
     }
@@ -113,6 +112,12 @@ private class Player(val name: String) {
         private set
 
     var inPenaltyBox = false
+        private set
+
+    fun sendToPenaltyBox() {
+        println("$name was sent to the penalty box")
+        inPenaltyBox = true
+    }
 
     fun move(roll: Int) {
         place += roll
