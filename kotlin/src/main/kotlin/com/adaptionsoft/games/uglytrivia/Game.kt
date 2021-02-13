@@ -43,9 +43,9 @@ class Game {
         println("Answer was correct!!!!")
         players.current().addCoin()
 
-        val noWinnerYet = !players.current().playerWon()
+        val continueGame = !players.current().playerWon()
         players.next()
-        return noWinnerYet
+        return continueGame
     }
 
     fun wrongAnswer(): Boolean {
